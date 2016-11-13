@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script language="JavaScript">
+        var fName = "";
+        var lName = "";
+        function processForm() {
+            var parameters = location.search.substring(1).split("&");
+            var temp1 = parameters[0].split("=");
+            var p1 = unescape(temp1[1]);
+            fName = p1;
+            var temp2 = parameters[0].split("=");
+            var p2 = unescape(temp2[1]);
+            lName = p2;
+        }
+        function init(){
+            document.getElementById("fname").innerHTML = l;
+            document.getElementById("fname").innerHTML = l;
+        }
+        processForm();
+    </script>
+</head>
+<body onload="init()">
+First Name : <label id="fname"></label> <br/>
+Last Name : <label id="lname"></label>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<form name="myForm" action="new.html">
+    <input type="checkbox" name="vehicle" value="Bike">I have a bike
+    <br>
+    <input type="checkbox" name="vehicle" value="Car">I have a car
+    <br><br>
+    <input type="button">
+</form>
+
+</body>
+
+<script>
+
+</script>
+</html>

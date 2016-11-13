@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">e_shop</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="st_category" view="colnames">
+<left>841</left>
+<top>216</top>
+<width>152</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `st_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="st_item" view="colnames">
+<left>452</left>
+<top>15</top>
+<width>138</width>
+<height>231</height>
+<sql_create_table>CREATE TABLE `st_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) DEFAULT NULL,
+  `labeled_price` double DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `price_code` varchar(255) DEFAULT NULL,
+  `purchased_price` double DEFAULT NULL,
+  `stock` double DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `unit_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_i11nx6onn3qpm0aj9qcwlv1p1` (`category_id`),
+  KEY `FK_i1ulsqs1ltpdvqcv1orrvn4df` (`unit_id`),
+  CONSTRAINT `FK_i1ulsqs1ltpdvqcv1orrvn4df` FOREIGN KEY (`unit_id`) REFERENCES `st_measurement_unit` (`id`),
+  CONSTRAINT `FK_i11nx6onn3qpm0aj9qcwlv1p1` FOREIGN KEY (`category_id`) REFERENCES `st_category` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="st_item_in_log" view="colnames">
+<left>839</left>
+<top>29</top>
+<width>155</width>
+<height>163</height>
+<sql_create_table>CREATE TABLE `st_item_in_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `qty` double DEFAULT NULL,
+  `unit_price` double DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  `ledger_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_31nn46k4qfhpwt60hf0tv1062` (`item_id`),
+  KEY `FK_5v4rlufop2vhbug0rylm7gg1u` (`ledger_id`),
+  CONSTRAINT `FK_5v4rlufop2vhbug0rylm7gg1u` FOREIGN KEY (`ledger_id`) REFERENCES `st_stock_ledger` (`id`),
+  CONSTRAINT `FK_31nn46k4qfhpwt60hf0tv1062` FOREIGN KEY (`item_id`) REFERENCES `st_item` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="st_item_out_log" view="colnames">
+<left>189</left>
+<top>14</top>
+<width>140</width>
+<height>214</height>
+<sql_create_table>CREATE TABLE `st_item_out_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `discount` double DEFAULT NULL,
+  `labeled_price` double DEFAULT NULL,
+  `purchased_price` double DEFAULT NULL,
+  `qty` double DEFAULT NULL,
+  `sales_price` double DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  `ledger_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_dt7qq2forrkhtalv1me3p6rl0` (`item_id`),
+  KEY `FK_17e8l6vl2ubeos0sjny3uboo9` (`ledger_id`),
+  CONSTRAINT `FK_17e8l6vl2ubeos0sjny3uboo9` FOREIGN KEY (`ledger_id`) REFERENCES `st_sales_ledger` (`id`),
+  CONSTRAINT `FK_dt7qq2forrkhtalv1me3p6rl0` FOREIGN KEY (`item_id`) REFERENCES `st_item` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="st_sales_ledger" view="colnames">
+<left>14</left>
+<top>204</top>
+<width>138</width>
+<height>299</height>
+<sql_create_table>CREATE TABLE `st_sales_ledger` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_name` varchar(255) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `due_total` double DEFAULT NULL,
+  `order_no` varchar(255) DEFAULT NULL,
+  `paid_total` double DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `total_amt` double DEFAULT NULL,
+  `total_off` double DEFAULT NULL,
+  `customer_id` bigint(20) DEFAULT NULL,
+  `sales_man_id` bigint(20) DEFAULT NULL,
+  `source_id` int(11) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_k7bucsf0px91bm2hms4acckyc` (`customer_id`),
+  KEY `FK_45p8to2yyy9qiw0elpfubaljf` (`sales_man_id`),
+  KEY `FK_d6eoc40bu1n8rsu10da9y5r1o` (`source_id`),
+  KEY `FK_8kol866c6p46rebcs354khwh2` (`store_id`),
+  CONSTRAINT `FK_8kol866c6p46rebcs354khwh2` FOREIGN KEY (`store_id`) REFERENCES `st_store` (`id`),
+  CONSTRAINT `FK_45p8to2yyy9qiw0elpfubaljf` FOREIGN KEY (`sales_man_id`) REFERENCES `ad_user_master` (`id`),
+  CONSTRAINT `FK_d6eoc40bu1n8rsu10da9y5r1o` FOREIGN KEY (`source_id`) REFERENCES `st_source` (`id`),
+  CONSTRAINT `FK_k7bucsf0px91bm2hms4acckyc` FOREIGN KEY (`customer_id`) REFERENCES `ad_user_master` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="st_stock_ledger" view="colnames">
+<left>604</left>
+<top>257</top>
+<width>155</width>
+<height>231</height>
+<sql_create_table>CREATE TABLE `st_stock_ledger` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_date` date DEFAULT NULL,
+  `ref_no` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `total_amt` double DEFAULT NULL,
+  `vendor_name` varchar(255) DEFAULT NULL,
+  `operator_id` bigint(20) DEFAULT NULL,
+  `source_id` int(11) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_jgd28195qr8sll92j3whuw7ws` (`operator_id`),
+  KEY `FK_1i78h5j29aapqkg9nb8e43f56` (`source_id`),
+  KEY `FK_c5yuyfsidrhgsu9xx0b32j9qy` (`store_id`),
+  CONSTRAINT `FK_c5yuyfsidrhgsu9xx0b32j9qy` FOREIGN KEY (`store_id`) REFERENCES `st_store` (`id`),
+  CONSTRAINT `FK_1i78h5j29aapqkg9nb8e43f56` FOREIGN KEY (`source_id`) REFERENCES `st_source` (`id`),
+  CONSTRAINT `FK_jgd28195qr8sll92j3whuw7ws` FOREIGN KEY (`operator_id`) REFERENCES `ad_user_master` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="st_store" view="colnames">
+<left>401</left>
+<top>330</top>
+<width>128</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `st_store` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `address` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="st_measurement_unit" view="colnames">
+<left>189</left>
+<top>259</top>
+<width>179</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `st_measurement_unit` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>

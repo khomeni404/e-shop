@@ -1,0 +1,120 @@
+.mak-min-height-1{min-height: 10px}
+.mak-min-height-2{min-height: 20px}
+.mak-min-height-3{min-height: 50px}
+.mak-min-height-4{min-height: 100px}
+.mak-min-height-5{min-height: 200px}
+
+.se-mandatory{
+    font-size: larger;
+    color:red
+}
+
+.se-in-msg{
+    padding: 10px 0 10px 10px; color: #ffff00; font-size: 17px
+}
+
+.se-block .content{
+    /*color: #000000;*/
+    /*color: white;*/
+    font-size: 14px;
+    background-color: white;
+    /*background-color: #7a98aa;*/
+}
+
+.se-select, .se-textarea{
+    color: #000000;
+    font-size: 13px
+}
+
+textarea, input[type] {
+    font-size: 17px;
+    color: #000000;
+}
+
+
+.se-header{
+    /*color: #ff6c10; */
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+}
+.se-header-wh {
+    font-size: 19px;
+    color: #000000;
+}
+.se-header-bl {
+    font-size: 19px;
+    color: #000000;
+}
+
+.se-amt{
+    text-align: right;
+    padding-right: 12px;
+    font-weight: bold;
+}
+.se-thead tr{
+    border-top: 3px double black;
+}
+.se-thead tr th{
+    border: 1px solid #000000;
+    background-color: #adb4c0;
+    color: #000000;
+    font-weight: bold;
+    text-align: center;
+}
+
+.se-dt-left{
+    text-align: right;
+    background-color: #969696;
+    font-weight: bold;
+    width: 20%;
+}
+.se-dt-center{
+    background-color: #acacac;
+    font-weight: bold;
+    text-align: center;
+    width: 5%;
+}
+.se-dt-right{
+    background-color: #b6b6b6;
+    font-weight: bold;
+    text-align: left;
+    width: 25%;
+}
+
+
+
+.font-bold {
+    font-weight: bold;
+}
+
+.highlight { background-color: yellow } /*This css for highlighting matched text see javascript-highlight.js*/
+
+.displaying-div{
+    text-align: center;
+    height: 25px;
+    width: 300px;
+    display: inline-block;
+    padding: 2px 0 0 0;
+    margin: 10px 0;
+    border-radius: 4px;
+    position: relative;
+    float: left;
+    line-height: 1.42857143;
+    color: #000000;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    font-weight: bold;
+}
+
+
+/*This properties is needed for show bootstrap date-picker on a modal*/
+.datepicker{z-index:1151 !important;}
+
+
+/*.nested{
+    background-image: url("http://cdn.backgroundhost.com/backgrounds/subtlepatterns/diagonal_striped_brick.png");
+    *//*background-color: #cccccc;*//*
+}*/
+

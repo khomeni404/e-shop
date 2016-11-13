@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">e_shop</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="ad_authority" view="colnames">
+<left>674</left>
+<top>182</top>
+<width>144</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `ad_authority` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="ad_component" view="colnames">
+<left>421</left>
+<top>265</top>
+<width>145</width>
+<height>156</height>
+<sql_create_table>CREATE TABLE `ad_component` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="ad_feature" view="colnames">
+<left>649</left>
+<top>382</top>
+<width>141</width>
+<height>146</height>
+<sql_create_table>CREATE TABLE `ad_feature` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `operation` varchar(255) DEFAULT NULL,
+  `component_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_l66yfrj9v7ig1aktaf5roity1` (`component_id`),
+  CONSTRAINT `FK_l66yfrj9v7ig1aktaf5roity1` FOREIGN KEY (`component_id`) REFERENCES `ad_component` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="ad_group" view="colnames">
+<left>582</left>
+<top>10</top>
+<width>189</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `ad_group` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `authorization_description` varchar(255) DEFAULT NULL,
+  `authorization_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="ad_token" view="colnames">
+<left>263</left>
+<top>364</top>
+<width>128</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `ad_token` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `password` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_hvsb7oix69se7r6t0niq19rns` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="ad_user_master" view="colnames">
+<left>60</left>
+<top>21</top>
+<width>150</width>
+<height>379</height>
+<sql_create_table>CREATE TABLE `ad_user_master` (
+  `user_type` varchar(31) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `active` bit(1) DEFAULT NULL,
+  `alt_phone` varchar(255) DEFAULT NULL,
+  `cell_phone` varchar(255) DEFAULT NULL,
+  `email_address` varchar(255) DEFAULT NULL,
+  `mailing_address` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `STAFF_ID` varchar(255) DEFAULT NULL,
+  `staffType` varchar(255) DEFAULT NULL,
+  `customer_id` varchar(255) DEFAULT NULL,
+  `cust_type` varchar(255) DEFAULT NULL,
+  `key_name` varchar(255) DEFAULT NULL,
+  `nid` varchar(255) DEFAULT NULL,
+  `tin` varchar(255) DEFAULT NULL,
+  `token_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_emt6jmli3lnxbecufswi9g8k1` (`token_id`),
+  CONSTRAINT `FK_emt6jmli3lnxbecufswi9g8k1` FOREIGN KEY (`token_id`) REFERENCES `ad_token` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="ad_zt_authority_feature" view="colnames">
+<left>900</left>
+<top>273</top>
+<width>198</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `ad_zt_authority_feature` (
+  `authority_id` bigint(20) NOT NULL,
+  `feature_id` bigint(20) NOT NULL,
+  KEY `FK_byasad0ve1amoeai5ech38mkp` (`feature_id`),
+  KEY `FK_dhlax0kuayc99ybgnf29nxpm2` (`authority_id`),
+  CONSTRAINT `FK_dhlax0kuayc99ybgnf29nxpm2` FOREIGN KEY (`authority_id`) REFERENCES `ad_authority` (`id`),
+  CONSTRAINT `FK_byasad0ve1amoeai5ech38mkp` FOREIGN KEY (`feature_id`) REFERENCES `ad_feature` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="ad_zt_group_authority" view="colnames">
+<left>910</left>
+<top>102</top>
+<width>186</width>
+<height>113</height>
+<sql_create_table>CREATE TABLE `ad_zt_group_authority` (
+  `group_id` bigint(20) NOT NULL,
+  `authority_id` bigint(20) NOT NULL,
+  KEY `FK_tje6e7fsvqjnqmaiq69co69yh` (`authority_id`),
+  KEY `FK_7ro5dhisgjeducygcab71xg74` (`group_id`),
+  CONSTRAINT `FK_7ro5dhisgjeducygcab71xg74` FOREIGN KEY (`group_id`) REFERENCES `ad_group` (`id`),
+  CONSTRAINT `FK_tje6e7fsvqjnqmaiq69co69yh` FOREIGN KEY (`authority_id`) REFERENCES `ad_authority` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="ad_zt_user_group" view="colnames">
+<left>349</left>
+<top>129</top>
+<width>155</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `ad_zt_user_group` (
+  `user_id` bigint(20) NOT NULL,
+  `group_id` bigint(20) NOT NULL,
+  KEY `FK_201h2nfqwj0pdamrbexaushkh` (`group_id`),
+  KEY `FK_1ndivhfe08k2ujy9unbnf187s` (`user_id`),
+  CONSTRAINT `FK_1ndivhfe08k2ujy9unbnf187s` FOREIGN KEY (`user_id`) REFERENCES `ad_user_master` (`id`),
+  CONSTRAINT `FK_201h2nfqwj0pdamrbexaushkh` FOREIGN KEY (`group_id`) REFERENCES `ad_group` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form>
+    First name: <input type="text" id="fname"><br>
+    Last name: <input type="text" id="lname"><br>
+    <input type="button" value="Submit" onclick="hitMe()">
+</form>
+</body>
+<script>
+    function hitMe(){
+        console.log(document.getElementById("fname").value);
+        console.log(document.getElementById("lname").value);
+    }
+</script>
+</html>

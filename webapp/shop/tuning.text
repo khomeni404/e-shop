@@ -1,0 +1,5 @@
+
+
+1. If no customer selected, disable paid total and set total value by jQuery
+2. if(dueNet > 0 and customer == null) return with message
+3. All return convert to 'Action Result' from 'boolean'
